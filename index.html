@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Bites - Intergalactic Food Delivery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <style>
+        /* Base Styles */
+:root {
+    --primary: #6c5ce7;
+    --primary-dark: #5649c0;
+    --secondary: #00cec9;
+    --dark: #2d3436;
+    --light: #f5f6fa;
+    --accent: #fd79a8;
+    --space-black: #0a0e17;
+    --star-white: rgba(255, 255, 255, 0.8);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--light);
+    background-color: var(--space-black);
+    overflow-x: hidden;
+}
+
+/* Starfield Animation */
+.starfield {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(1px 1px at 25px 5px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 50px 25px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 125px 20px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 50px 75px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 15px 125px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(2.5px 2.5px at 110px 80px, var(--star-white), rgba(0,0,0,0));
+    background-repeat: repeat;
+}
+
+.stars:nth-child(1) {
+    animation: animStar 50s linear infinite;
+}
+
+.stars:nth-child(2) {
+    background-image: 
+        radial-gradient(1px 1px at 75px 125px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 100px 75px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 199px 100px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 20px 50px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(2.5px 2.5px at 100px 5px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 5px 5px, var(--star-white), rgba(0,0,0,0));
+    animation: animStar 100s linear infinite;
+}
+
+.stars:nth-child(3) {
+    background-image: 
+        radial-gradient(1px 1px at 10px 10px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 150px 150px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 60px 170px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 175px 40px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 195px 25px, var(--star-white), rgba(0,0,0,0)),
+        radial-gradient(2.5px 2.5px at 95px 95px, var(--star-white), rgba(0,0,0,0));
+    animation: animStar 150s linear infinite;
+}
+
+@keyframes animStar {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(-2000px);
+    }
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 5%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.logo-icon {
+    font-size: 2rem;
+}
+
+.nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav a {
+    color: var(--light);
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav a:hover {
+    color: var(--secondary);
+}
+
+.nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--secondary);
+    transition: width 0.3s ease;
+}
+
+.nav a:hover::after {
+    width: 100%;
+}
+
+.cta-secondary {
+    background: transparent;
+    color: var(--light);
+    border: 1px solid var(--light);
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cta-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Hero Content */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5%;
+    max-width: 800px;
+    margin-top: -5rem;
+}
+
+.animated-headline {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards;
+    animation-delay: 0.3s;
+}
+
+.animated-headline span {
+    background: linear-gradient(90deg, var(--accent), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.subhead {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+}
+
+.cta-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cta-primary {
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+}
+
+.cta-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(108, 92, 231, 0.4);
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+.delivery-info {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Spaceship Animation */
+.spaceship {
+    position: absolute;
+    right: 10%;
+    bottom: 20%;
+    transform: translateX(200px) rotate(20deg);
+    opacity: 0;
+    animation: flyIn 1.5s ease forwards;
+    animation-delay: 0.8s;
+}
+
+.ship-body {
+    width: 120px;
+    height: 40px;
+    background: linear-gradient(90deg, #4a4e69, #22223b);
+    border-radius: 50px 50px 0 0;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 206, 201, 0.5);
+}
+
+.ship-window {
+    width: 20px;
+    height: 20px;
+    background-color: var(--secondary);
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    box-shadow: 0 0 10px var(--secondary);
+}
+
+.ship-wing-left, .ship-wing-right {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.ship-wing-left {
+    border-width: 20px 40px 0 0;
+    border-color: #9a8c98 transparent transparent transparent;
+    top: -20px;
+    left: -30px;
+    transform: rotate(20deg);
+}
+
+.ship-wing-right {
+    border-width: 0 40px 20px 0;
+    border-color: transparent #9a8c98 transparent transparent;
+    bottom: -20px;
+    right: -30px;
+    transform: rotate(20deg);
+}
+
+.exhaust {
+    position: absolute;
+    width: 40px;
+    height: 80px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    border-radius: 50% 50% 0 0;
+    bottom: -70px;
+    left: 40px;
+    transform: perspective(100px) rotateX(40deg);
+    filter: blur(5px);
+    opacity: 0.7;
+    animation: exhaustPulse 1s infinite alternate;
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 15px 30px rgba(108, 92, 231, 0.5);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+    }
+}
+
+@keyframes flyIn {
+    from {
+        opacity: 0;
+        transform: translateX(200px) rotate(20deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) rotate(0);
+    }
+}
+
+@keyframes exhaustPulse {
+    from {
+        height: 80px;
+        opacity: 0.7;
+    }
+    to {
+        height: 100px;
+        opacity: 0.4;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .nav ul {
+        gap: 1rem;
+    }
+    
+    .animated-headline {
+        font-size: 2.5rem;
+    }
+    
+    .spaceship {
+        right: 5%;
+        bottom: 10%;
+        transform: scale(0.8) translateX(200px) rotate(20deg);
+    }
+    
+    .spaceship.fly-in {
+        transform: scale(0.8) translateX(0) rotate(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .animated-headline {
+        font-size: 2rem;
+    }
+    
+    .subhead {
+        font-size: 1rem;
+    }
+    
+    .cta-primary {
+        padding: 0.8rem 1.8rem;
+        font-size: 1rem;
+    }
+    
+    .spaceship {
+        display: none;
+    }
+}
+    </style>
+    <section class="hero">
+        <div class="starfield">
+            <div class="stars"></div>
+            <div class="stars"></div>
+            <div class="stars"></div>
+        </div>
+        
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🚀</span>
+                <h1>Cosmic Bites</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Galactic Coverage</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+            <button class="cta-secondary">Order Now</button>
+        </header>
+        
+        <div class="hero-content">
+            <h2 class="animated-headline">Earth's Finest Cuisine, <span>Delivered Across the Galaxy</span></h2>
+            <p class="subhead">From Martian outposts to Jupiter's moons, we bring your favorite Earth dishes at warp speed. No matter where you are in the solar system, dinner is just 30 light-minutes away.</p>
+            
+            <div class="cta-container">
+                <button class="cta-primary pulse">Beam Me Some Food</button>
+                <span class="delivery-info">🚀 Delivering to 8 planets and 217 moons</span>
+            </div>
+        </div>
+        
+        <div class="spaceship">
+            <div class="ship-body"></div>
+            <div class="ship-window"></div>
+            <div class="ship-wing-left"></div>
+            <div class="ship-wing-right"></div>
+            <div class="exhaust"></div>
+        </div>
+    </section>
+</body>
+</html>
